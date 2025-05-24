@@ -7,7 +7,7 @@ plugins {
 }
 
 kotlin {
-    jvm("desktop")
+    jvm()
     androidTarget {
         publishLibraryVariants("release")
         compilerOptions {
@@ -17,7 +17,6 @@ kotlin {
     iosX64()
     iosArm64()
     iosSimulatorArm64()
-    linuxX64()
     @OptIn(ExperimentalWasmDsl::class)
     wasmJs {
         browser()
@@ -40,8 +39,6 @@ kotlin {
             }
         }
         val wasmJsTest by getting
-
-        val desktopMain by getting
     }
 }
 
