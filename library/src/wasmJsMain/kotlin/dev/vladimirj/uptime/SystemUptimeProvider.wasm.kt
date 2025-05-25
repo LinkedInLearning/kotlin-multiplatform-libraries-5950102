@@ -2,7 +2,7 @@ package dev.vladimirj.uptime
 
 private val startTime = getCurrentTimeMillis().toLong()
 
-fun getSystemUptimeInSeconds(): Long {
+actual fun getSystemUptimeInSeconds(): Long {
     return (getCurrentTimeMillis().toLong() - startTime) / 1000
 }
 

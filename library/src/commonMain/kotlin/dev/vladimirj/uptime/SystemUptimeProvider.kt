@@ -8,4 +8,4 @@ fun getUptimeMessage(uptimeInSeconds: Long): String {
     }
 }
 
-private fun getSystemUptimeInSeconds(): Long
+internal expect fun getSystemUptimeInSeconds(): Long
