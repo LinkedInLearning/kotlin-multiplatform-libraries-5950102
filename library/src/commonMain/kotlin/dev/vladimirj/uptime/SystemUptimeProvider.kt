@@ -1,6 +1,6 @@
 package dev.vladimirj.uptime
 
-fun getUptimeMessage(uptimeInSeconds: Long): String {
+fun getUptimeMessage(uptimeInSeconds: Long = getSystemUptimeInSeconds()): String {
     return if (uptimeInSeconds >= 0) {
         "The system has been up for $uptimeInSeconds seconds"
     } else {
