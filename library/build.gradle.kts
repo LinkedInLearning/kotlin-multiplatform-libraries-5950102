@@ -1,9 +1,11 @@
+import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
+    alias(libs.plugins.vanniktech.mavenPublish)
 }
 
 kotlin {
@@ -70,5 +72,40 @@ android {
     }
     testOptions {
         unitTests.isIncludeAndroidResources = true
+    }
+}
+
+mavenPublishing {
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
+
+    signAllPublications()
+
+    coordinates(
+        "dev.vladimirj",
+        "uptime",
+        "1.0.0"
+    )
+
+    pom {
+        name = "Uptime library"
+        description = "Uptime library provides a cross-platform function to retrieve the system's uptime in seconds."
+        inceptionYear = "2025"
+        url = "https://github.com/LinkedInLearning/kotlin-multiplatform-libraries-5950102"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "VladimirWrites"
+                name = "Vladimir Jovanovic"
+                url = "https://vladimirj.dev"
+            }
+        }
+        scm {
+            url = "https://github.com/LinkedInLearning/kotlin-multiplatform-libraries-5950102"
+        }
     }
 }
