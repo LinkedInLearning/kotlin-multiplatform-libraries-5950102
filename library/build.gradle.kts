@@ -1,14 +1,48 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.plugin.mpp.apple.XCFramework
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.vanniktech.mavenPublish)
+    alias(libs.plugins.kotlinCocoapods)
 }
 
 kotlin {
+    val xcframeworkName = "Uptime"
+    val xcf = XCFramework(xcframeworkName)
+
+    listOf(
+        iosX64(),
+        iosArm64(),
+        iosSimulatorArm64(),
+    ).forEach {
+        it.binaries.framework {
+            baseName = xcframeworkName
+
+            binaryOption("bundleId", "dev.vladimirj.${xcframeworkName}")
+            xcf.add(this)
+            isStatic = true
+        }
+    }
+
+    cocoapods {
+        summary = "Uptime library for Apple targets"
+        homepage = "https://github.com/LinkedInLearning/kotlin-multiplatform-libraries-5950102"
+
+        version = "1.0.0"
+        ios.deploymentTarget = "14.1"
+
+        name = "Uptime"
+
+        framework {
+            baseName = "Uptime"
+            isStatic = true
+        }
+    }
+
     jvm()
     androidTarget {
         publishLibraryVariants("release")
