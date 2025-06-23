@@ -14,4 +14,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "kotlin-multiplatform-libraries"
-include(":library")
+include(":library", ":composeApp")
